@@ -1,195 +1,1147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Treasure Courier Services Ltd – Shop Online. We Deliver.</title>
-  <meta name="description" content="Treasure Courier Services Ltd – Fast, reliable air and sea shipping from Miami to Jamaica." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy: #0d2460;
-      --blue: #1565c0;
-      --sky:  #e8f4fd;
-      --gold: #f5a800;
-      --white: #ffffff;
-    }
-    body { font-family: 'Barlow', sans-serif; background: var(--navy); }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Treasure Courier Services Ltd – Shop Online. We Deliver.</title>
+<meta name="description" content="Fast, reliable air and sea shipping from Miami to Jamaica. USD $5/lb. 3 flights per week. Door to door delivery."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --N1:#0e2a6e; --N2:#1440a0; --N3:#1e5cd6; --N4:#4a82f0;
+  --G1:#f5a800; --G2:#ffd04a; --R1:#c8001a;
+  --W:#fff; --OFF:#f4f7fc; --TXT:#0e2050; --MUT:#5a6e8a;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;color:var(--TXT);background:var(--W);overflow-x:hidden;}
 
-    /* ── FLYER ─────────────────────────────────────── */
-    .flyer {
-      background: var(--navy);
-      display: flex; justify-content: center;
-      padding: 0;
-    }
-    .flyer img {
-      display: block;
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-    }
+/* ═══════════════════════ HEADER (RSB style) ═══════════════════════ */
+.header-top{
+  background:#1240a8;
+  padding:8px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ht-tagline{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--G1);
+}
+.ht-right{display:flex;align-items:center;gap:20px;}
+.ht-phone{font-size:12px;color:rgba(255,255,255,.6);font-weight:600;}
+.ht-phone a{color:rgba(255,255,255,.75);text-decoration:none;}
+.ht-phone a:hover{color:var(--G1);}
+.ht-signup{
+  background:var(--G1);color:var(--N1);
+  padding:6px 18px;border-radius:4px;
+  font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;transition:background .2s;
+}
+.ht-signup:hover{background:var(--G2);}
 
-    /* ── CONTACT FORM ──────────────────────────────── */
-    .contact {
-      background: linear-gradient(175deg, #daeeff 0%, #f0f8ff 60%, #ffffff 100%);
-      padding: 48px 24px 60px;
-    }
-    .form-wrap {
-      max-width: 560px; margin: 0 auto;
-      background: var(--white);
-      border: 1.5px solid #ccddf5;
-      border-top: 4px solid var(--gold);
-      border-radius: 12px;
-      padding: 36px 32px;
-      box-shadow: 0 8px 32px rgba(21,101,192,0.08);
-    }
-    .form-heading {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 30px; letter-spacing: 1px;
-      color: var(--navy); margin-bottom: 24px;
-    }
-    .form-heading span { color: var(--gold); }
+.header-main{
+  background:var(--W);
+  border-bottom:1px solid #e0e8f5;
+  padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:72px;
+  position:sticky;top:0;z-index:300;
+  box-shadow:0 2px 16px rgba(12,31,94,.07);
+}
+.hm-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.hm-badge{
+  width:46px;height:46px;border-radius:50%;
+  background:var(--G1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--N1);
+  letter-spacing:1px;flex-shrink:0;
+}
+.hm-words .w1{font-family:'Bebas Neue',sans-serif;font-size:19px;color:var(--N1);letter-spacing:2px;line-height:1;}
+.hm-words .w2{font-size:10px;font-weight:600;color:var(--MUT);letter-spacing:1.5px;}
+.hm-nav{display:flex;align-items:center;gap:36px;}
+.hm-nav a{
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+  color:var(--TXT);text-decoration:none;
+  text-transform:uppercase;
+  position:relative;padding-bottom:4px;
+  transition:color .2s;
+}
+.hm-nav a::after{
+  content:'';position:absolute;bottom:0;left:0;right:100%;
+  height:2px;background:var(--G1);transition:right .25s ease;
+}
+.hm-nav a:hover{color:var(--N3);}
+.hm-nav a:hover::after{right:0;}
+.hm-cta{
+  background:var(--N2);color:var(--W);
+  padding:11px 26px;border-radius:5px;
+  font-size:13px;font-weight:900;letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;transition:background .2s,transform .15s;
+}
+.hm-cta:hover{background:var(--N3);transform:translateY(-1px);}
+.hm-ham{display:none;background:none;border:none;font-size:26px;color:var(--N1);cursor:pointer;}
 
-    .cform { display: flex; flex-direction: column; gap: 14px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .fg { display: flex; flex-direction: column; gap: 5px; }
-    .fg label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); }
-    .fg input, .fg select, .fg textarea {
-      background: var(--sky);
-      border: 1.5px solid #b8d0ee;
-      border-radius: 7px; padding: 11px 14px;
-      color: var(--navy); font-size: 14px; font-family: 'Barlow', sans-serif;
-      outline: none; transition: border-color 0.2s, background 0.2s;
-      -webkit-appearance: none; appearance: none;
-    }
-    .fg input::placeholder, .fg textarea::placeholder { color: #94afc8; }
-    .fg input:focus, .fg select:focus, .fg textarea:focus {
-      border-color: var(--gold); background: #fffbf0;
-    }
-    .fg textarea { min-height: 88px; resize: vertical; }
+.mob-nav{
+  display:none;position:fixed;
+  top:72px;left:0;right:0;
+  background:var(--W);z-index:290;
+  flex-direction:column;
+  border-top:2px solid var(--G1);
+  box-shadow:0 8px 32px rgba(12,31,94,.15);
+}
+.mob-nav.open{display:flex;}
+.mob-nav a{
+  padding:16px 32px;font-size:14px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  color:var(--TXT);text-decoration:none;
+  border-bottom:1px solid var(--OFF);
+  transition:background .2s,color .2s;
+}
+.mob-nav a:hover{background:var(--OFF);color:var(--N3);}
+.mob-nav a:last-child{background:var(--G1);color:var(--N1);text-align:center;}
 
-    .btn-row { display: flex; gap: 12px; margin-top: 4px; }
-    .btn-submit {
-      flex: 1;
-      background: var(--navy); color: var(--white);
-      padding: 14px 24px; border: none; border-radius: 8px;
-      font-size: 14px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase;
-      cursor: pointer; font-family: 'Barlow', sans-serif;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-submit:hover { background: var(--blue); transform: translateY(-2px); }
-    .btn-whatsapp {
-      display: flex; align-items: center; gap: 8px;
-      background: #e7fbed; border: 1.5px solid #7ed8a0;
-      border-radius: 8px; padding: 13px 18px;
-      color: #1a7a3f; font-size: 13px; font-weight: 800;
-      text-decoration: none; white-space: nowrap;
-      transition: background 0.2s;
-    }
-    .btn-whatsapp:hover { background: #d0f5dd; }
-    .wa-icon { font-size: 20px; line-height: 1; }
+/* ═══════════════════════ HERO ═══════════════════════ */
+.hero{
+  min-height:calc(100vh - 108px);
+  background:radial-gradient(ellipse at 70% 50%, #0e2a8a 0%, #07154a 55%, #040e30 100%);
+  display:grid;grid-template-columns:50% 50%;
+  align-items:center;overflow:hidden;position:relative;
+}
+.hero-dots{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:30px 30px;
+}
+.hero-left{
+  position:relative;z-index:2;
+  padding:80px 40px 80px 80px;
+}
+.h-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,168,0,.15);border:1px solid rgba(245,168,0,.4);
+  color:var(--G1);font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+  padding:7px 18px;border-radius:40px;margin-bottom:28px;
+  animation:fU .6s ease both;
+}
+.h-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(62px,8vw,118px);
+  color:var(--W);line-height:.88;letter-spacing:2px;
+  animation:fU .7s ease .1s both;
+}
+.h-title .gld{color:var(--G1);}
+.h-title .out{-webkit-text-stroke:2px rgba(255,255,255,.6);color:transparent;}
+.h-sub{
+  font-size:clamp(14px,1.5vw,17px);color:rgba(255,255,255,.6);
+  line-height:1.75;margin:22px 0 38px;max-width:460px;
+  animation:fU .7s ease .2s both;
+}
+.h-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fU .7s ease .3s both;}
+.btn-gold{
+  background:var(--G1);color:var(--N1);
+  padding:15px 38px;border-radius:5px;
+  font-size:14px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  text-decoration:none;transition:all .2s;
+  box-shadow:0 6px 24px rgba(245,168,0,.4);
+}
+.btn-gold:hover{background:var(--G2);transform:translateY(-2px);}
+.btn-ghost{
+  background:transparent;color:var(--W);
+  border:2px solid rgba(255,255,255,.3);
+  padding:13px 36px;border-radius:5px;
+  font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  text-decoration:none;transition:all .2s;
+}
+.btn-ghost:hover{border-color:var(--G1);color:var(--G1);}
 
-    footer {
-      background: var(--navy); padding: 20px 24px; text-align: center;
-    }
-    footer p { font-size: 12px; color: rgba(255,255,255,0.4); }
-    footer span { color: var(--gold); }
+/* GLOBE */
+.hero-right{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  padding:40px 60px 40px 0;
+  animation:fU .8s ease .2s both;
+}
+#globeCanvas{
+  width:min(480px,90vw);height:min(480px,90vw);
+  display:block;
+}
 
-    @media (max-width: 480px) {
-      .form-wrap { padding: 28px 20px; }
-      .form-row { grid-template-columns: 1fr; }
-      .btn-row { flex-direction: column; }
-    }
-  </style>
+/* City tooltip pulse rings */
+@keyframes ping{
+  0%{transform:scale(1);opacity:.8;}
+  100%{transform:scale(2.8);opacity:0;}
+}
+
+@keyframes fU{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:none;}}
+
+/* ═══════════════════════ STATS ═══════════════════════ */
+.stats{
+  background:var(--G1);
+  display:flex;justify-content:center;flex-wrap:wrap;
+  border-bottom:4px solid #d4900a;
+}
+.si{
+  padding:22px 52px;
+  border-right:1px solid rgba(12,31,94,.2);
+  display:flex;align-items:center;gap:14px;
+}
+.si:last-child{border-right:none;}
+.si-icon{font-size:30px;}
+.si-num{font-family:'Bebas Neue',sans-serif;font-size:46px;color:var(--N1);line-height:1;}
+.si-lbl{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--N1);opacity:.7;}
+
+/* ═══════════════════════ HOW IT WORKS ═══════════════════════ */
+.hiw{
+  background:var(--OFF);
+  padding:100px 24px 110px;
+  position:relative;
+  clip-path:polygon(0 0,100% 0,100% 95%,50% 100%,0 95%);
+}
+.con{max-width:1160px;margin:0 auto;}
+.sec-ey{font-size:11px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--N3);margin-bottom:10px;}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,66px);color:var(--N1);line-height:.95;}
+.sec-h span{color:var(--G1);}
+.sec-p{font-size:16px;color:var(--MUT);line-height:1.7;margin-top:14px;max-width:540px;}
+
+.hiw-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:28px;margin-top:60px;
+}
+.hc{
+  background:var(--W);border-radius:18px;overflow:hidden;
+  border:1.5px solid #d8e6f7;
+  transition:transform .25s,box-shadow .25s;
+  position:relative;
+}
+.hc:hover{transform:translateY(-8px);box-shadow:0 24px 64px rgba(12,31,94,.14);}
+.hc-num-bg{
+  position:absolute;top:-10px;right:16px;
+  font-family:'Bebas Neue',sans-serif;font-size:120px;
+  color:rgba(15,34,120,.06);line-height:1;pointer-events:none;
+  user-select:none;
+}
+.hc-top{
+  background:linear-gradient(135deg,var(--N2),var(--N3));
+  padding:30px 28px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.hc-step{
+  font-family:'Bebas Neue',sans-serif;font-size:16px;
+  color:var(--G1);letter-spacing:3px;
+}
+.hc-ico{font-size:46px;}
+.hc-body{padding:24px 28px 32px;}
+.hc-body h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:24px;font-weight:900;color:var(--N1);
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;
+}
+.hc-body p{font-size:14px;color:var(--MUT);line-height:1.65;}
+
+/* ═══════════════════════ SERVICES ═══════════════════════ */
+.svc{
+  background:var(--OFF);
+  padding:110px 24px 100px;
+  position:relative;overflow:hidden;
+}
+.svc::before{display:none;}
+.svc::after{display:none;}
+.svc .sec-ey{color:var(--N3);}
+.svc .sec-h{color:var(--N1);}
+.svc .sec-p{color:var(--MUT);}
+.svc-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;margin-top:60px;position:relative;z-index:1;
+}
+.sc{
+  background:var(--W);
+  border:1.5px solid #d8e6f5;
+  border-top:4px solid var(--N3);
+  border-radius:14px;padding:32px 24px;
+  transition:border-top-color .2s,box-shadow .2s,transform .25s;
+}
+.sc:hover{
+  border-top-color:var(--G1);
+  box-shadow:0 16px 48px rgba(14,42,110,.12);
+  transform:translateY(-8px);
+}
+.sc-ico{font-size:46px;margin-bottom:20px;}
+.sc h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:21px;font-weight:900;color:var(--N1);
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;
+}
+.sc p{font-size:13px;color:var(--MUT);line-height:1.65;}
+.sc-lnk{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:18px;font-size:13px;font-weight:700;
+  color:var(--N3);text-decoration:none;
+  transition:gap .2s,color .2s;
+}
+.sc-lnk:hover{gap:12px;color:var(--G1);}
+
+/* ═══════════════════════ WHY US / LOCATIONS ═══════════════════════ */
+.why{background:var(--W);padding:100px 24px;}
+.why-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;margin-top:60px;
+}
+.why-list{display:flex;flex-direction:column;}
+.wi{
+  display:flex;gap:18px;align-items:flex-start;
+  padding:22px 0;border-bottom:1px solid #e5eef8;
+}
+.wi:last-child{border-bottom:none;}
+.wi-ico{
+  width:52px;height:52px;border-radius:12px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--N2),var(--N3));
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+}
+.wi h4{font-size:15px;font-weight:800;color:var(--N1);margin-bottom:5px;}
+.wi p{font-size:13px;color:var(--MUT);line-height:1.6;}
+.wi p b{color:var(--N3);}
+
+.why-stats{display:flex;flex-direction:column;gap:16px;}
+.ws{
+  border-radius:16px;padding:28px 32px;
+  display:flex;align-items:center;gap:24px;
+  transition:transform .2s,box-shadow .2s;
+  cursor:default;
+}
+.ws:hover{transform:translateX(8px);}
+.ws-num{
+  font-family:'Bebas Neue',sans-serif;font-size:64px;
+  line-height:1;flex-shrink:0;min-width:100px;
+}
+.ws h4{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;}
+.ws p{font-size:12px;line-height:1.5;opacity:.7;}
+.ws-dark{background:#1240a8;color:var(--W);}
+.ws-dark .ws-num{color:var(--G1);}
+.ws-gold{background:var(--G1);}
+.ws-gold .ws-num,.ws-gold h4,.ws-gold p{color:var(--N1);}
+.ws-blue{background:var(--N3);color:var(--W);}
+.ws-blue .ws-num{color:var(--G2);}
+
+/* ═══════════════════════ REFERRAL BANNER ═══════════════════════ */
+.refbanner{
+  background:linear-gradient(135deg,var(--G1) 0%,#e09500 100%);
+  padding:60px 24px;
+  position:relative;overflow:hidden;
+}
+.refbanner::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.refbanner-inner{
+  max-width:900px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:32px;position:relative;z-index:1;
+}
+.ref-text h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,5vw,64px);color:var(--N1);line-height:.95;
+}
+.ref-text h2 span{color:var(--W);}
+.ref-text p{font-size:15px;color:rgba(14,42,110,.7);margin-top:12px;line-height:1.6;}
+.ref-badge{
+  background:var(--N1);border-radius:16px;
+  padding:28px 44px;text-align:center;flex-shrink:0;
+  box-shadow:0 12px 40px rgba(14,42,110,.3);
+}
+.ref-badge .pct{font-family:'Bebas Neue',sans-serif;font-size:80px;color:var(--G1);line-height:1;}
+.ref-badge .lbl{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);}
+
+/* ═══════════════════════ CONTACT ═══════════════════════ */
+.contact{background:var(--OFF);padding:100px 24px;}
+.contact-inner{
+  display:grid;grid-template-columns:1fr 1.15fr;
+  gap:56px;align-items:start;margin-top:60px;
+}
+.c-cards{display:flex;flex-direction:column;gap:14px;}
+.cc{
+  background:var(--W);border-radius:13px;
+  border:1.5px solid #d8e6f7;border-left:4px solid var(--N3);
+  padding:18px 20px;display:flex;gap:14px;align-items:flex-start;
+  transition:border-left-color .2s,box-shadow .2s,transform .2s;
+}
+.cc:hover{border-left-color:var(--G1);box-shadow:0 8px 28px rgba(12,31,94,.1);transform:translateX(5px);}
+.cc-ico{
+  width:44px;height:44px;border-radius:9px;flex-shrink:0;
+  background:var(--OFF);display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+.cc-lbl{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--N3);margin-bottom:4px;}
+.cc-val{font-size:14px;font-weight:600;color:var(--N1);line-height:1.55;}
+.cc-val a{color:var(--N1);text-decoration:none;}
+.cc-val a:hover{color:var(--N3);text-decoration:underline;}
+.cc-sub{font-size:12px;color:var(--MUT);display:block;margin-top:2px;}
+
+.fpanel{
+  background:var(--W);border-radius:18px;
+  border:1.5px solid #d8e6f7;border-top:5px solid var(--G1);
+  padding:40px 36px;
+  box-shadow:0 16px 56px rgba(12,31,94,.1);
+}
+.fpanel h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px;letter-spacing:1px;color:var(--N1);margin-bottom:28px;
+}
+.fpanel h3 span{color:var(--G1);}
+.cform{display:flex;flex-direction:column;gap:15px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:15px;}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fg label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--N3);}
+.fg input,.fg select,.fg textarea{
+  background:var(--OFF);border:1.5px solid #ccdcef;
+  border-radius:8px;padding:12px 15px;
+  color:var(--N1);font-size:14px;font-family:'Barlow',sans-serif;
+  outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none;
+}
+.fg input::placeholder,.fg textarea::placeholder{color:#9ab0c8;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--G1);background:#fffbf0;}
+.fg textarea{min-height:90px;resize:vertical;}
+.f-note{
+  background:#fff8e1;border:1.5px solid var(--G1);
+  border-radius:9px;padding:13px 16px;
+  font-size:13px;color:var(--N1);line-height:1.5;
+}
+.f-note strong{color:var(--R1);}
+.brow{display:flex;gap:12px;}
+.fsub{
+  flex:1;background:var(--N1);color:var(--W);
+  padding:15px;border:none;border-radius:8px;
+  font-size:14px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  cursor:pointer;font-family:'Barlow',sans-serif;
+  transition:background .2s,transform .15s;
+}
+.fsub:hover{background:var(--N3);transform:translateY(-2px);}
+.fwa{
+  display:flex;align-items:center;gap:8px;
+  background:#e7fbed;border:1.5px solid #7ed8a0;
+  border-radius:8px;padding:14px 20px;
+  color:#1a7a3f;font-size:13px;font-weight:800;
+  text-decoration:none;white-space:nowrap;transition:background .2s;
+}
+.fwa:hover{background:#d0f5dd;}
+#ok{display:none;text-align:center;padding:48px 20px;}
+#ok .tick{font-size:58px;margin-bottom:16px;}
+#ok h4{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--N1);}
+#ok p{font-size:14px;color:var(--MUT);margin-top:8px;}
+
+/* ═══════════════════════ FOOTER ═══════════════════════ */
+footer{background:var(--N1);padding:64px 24px 28px;}
+.ft{max-width:1160px;margin:0 auto;}
+.ft-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;margin-bottom:48px;
+}
+.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--W);letter-spacing:2px;margin-bottom:14px;}
+.ft-logo span{color:var(--G1);}
+.ft-brand p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;max-width:280px;}
+.ft-socs{display:flex;gap:10px;margin-top:22px;}
+.fts{
+  width:38px;height:38px;border-radius:8px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;text-decoration:none;transition:background .2s;
+}
+.fts:hover{background:rgba(245,168,0,.25);}
+.ft-col h4{font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--G1);margin-bottom:18px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-col li a,.ft-col li span{font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.ft-col li a:hover{color:var(--W);}
+hr.fdiv{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:22px;}
+.ftbtm{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px;color:rgba(255,255,255,.3);}
+.ftbtm span{color:var(--G1);}
+
+/* ═══════════════════════ REVEAL ═══════════════════════ */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;}
+.rv.in{opacity:1;transform:none;}
+
+/* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+@media(max-width:1024px){
+  .svc-grid{grid-template-columns:repeat(2,1fr);}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:32px;}
+}
+@media(max-width:860px){
+  .header-top{padding:8px 20px;}
+  .header-main{padding:0 20px;}
+  .hm-nav,.hm-cta{display:none;}
+  .hm-ham{display:block;}
+  .hero{grid-template-columns:1fr;}
+  .hero-left{padding:56px 28px 32px;}
+  .hero-right{padding:0 28px 60px;}
+  #globeCanvas{width:min(360px,85vw);height:min(360px,85vw);}
+  .hiw-grid{grid-template-columns:1fr;}
+  .why-inner{grid-template-columns:1fr;gap:40px;}
+  .contact-inner{grid-template-columns:1fr;}
+}
+@media(max-width:540px){
+  .svc-grid{grid-template-columns:1fr;}
+  .frow{grid-template-columns:1fr;}
+  .brow{flex-direction:column;}
+  .si{padding:16px 22px;}
+  .ft-grid{grid-template-columns:1fr;gap:28px;}
+  .ftbtm{flex-direction:column;text-align:center;}
+  .refbanner-inner{flex-direction:column;text-align:center;}
+  .lbanner-content{flex-direction:column;text-align:center;}
+  .lbanner-content h2{font-size:clamp(32px,8vw,52px);}
+  .tgrid{grid-template-columns:1fr!important;}
+}
+
+/* ── LIFESTYLE BANNER ── */
+.lbanner{
+  position:relative;height:420px;overflow:hidden;
+  display:flex;align-items:center;
+}
+.lbanner-img{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center 30%;
+  filter:brightness(0.55) saturate(1.1);
+  transition:transform 8s ease;
+}
+.lbanner:hover .lbanner-img{transform:scale(1.04);}
+.lbanner-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(7,21,74,0.85) 0%,rgba(7,21,74,0.3) 60%,rgba(7,21,74,0.1) 100%);
+}
+.lbanner-content{
+  position:relative;z-index:2;
+  max-width:1160px;margin:0 auto;padding:0 48px;
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:32px;
+}
+.lbanner-content h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,4.5vw,68px);
+  color:var(--W);line-height:.93;letter-spacing:1px;
+}
+.lbanner-content h2 span{color:var(--G1);}
+.lbanner-content p{
+  font-size:16px;color:rgba(255,255,255,.75);
+  max-width:340px;line-height:1.65;margin-top:12px;
+}
+.lbanner-right{flex-shrink:0;}
+
+/* ── TESTIMONIALS ── */
+.testimonials{background:var(--W);padding:90px 24px;}
+.tgrid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:28px;margin-top:56px;
+}
+.tcard{
+  background:var(--OFF);border-radius:18px;
+  border:1.5px solid #dde8f7;
+  padding:32px 28px;
+  display:flex;flex-direction:column;gap:20px;
+  transition:transform .25s,box-shadow .25s;
+}
+.tcard:hover{transform:translateY(-6px);box-shadow:0 20px 56px rgba(12,31,94,.1);}
+.tcard-stars{color:var(--G1);font-size:18px;letter-spacing:2px;}
+.tcard-quote{
+  font-size:15px;color:var(--TXT);line-height:1.7;
+  font-style:italic;flex:1;
+  position:relative;padding-top:8px;
+}
+.tcard-quote::before{
+  content:'\201C';
+  font-family:'Bebas Neue',sans-serif;
+  font-size:72px;color:var(--G1);opacity:.25;
+  position:absolute;top:-18px;left:-8px;line-height:1;
+}
+.tcard-person{display:flex;align-items:center;gap:14px;border-top:1px solid #dde8f7;padding-top:20px;}
+.tcard-avatar{
+  width:54px;height:54px;border-radius:50%;
+  object-fit:cover;flex-shrink:0;
+  border:3px solid var(--G1);
+}
+.tcard-name{font-weight:800;font-size:14px;color:var(--N1);}
+.tcard-loc{font-size:12px;color:var(--MUT);margin-top:2px;}
+
+@media(max-width:860px){
+  .lbanner{height:auto;padding:56px 0;}
+  .lbanner-content{padding:0 28px;flex-direction:column;text-align:center;}
+  .lbanner-content p,.lbanner-right{max-width:100%;}
+  .tgrid{grid-template-columns:1fr;}
+}
+@media(max-width:540px){
+  .tgrid{grid-template-columns:1fr;}
+}
+</style>
 </head>
 <body>
 
-  <div class="flyer">
-    <img src="flyer-1024x1792.png" alt="Treasure Courier Services Ltd – Shop Online. We Deliver." />
+<!-- ═══════════════════════ HEADER ═══════════════════════ -->
+<div class="header-top">
+  <span class="ht-tagline">✈ Buy it · Ship it · Get it</span>
+  <div class="ht-right">
+    <span class="ht-phone"><a href="tel:+18768212068">876-821-2068</a> &nbsp;·&nbsp; <a href="tel:+18767570564">876-757-0564</a></span>
+    <a href="#contact" class="ht-signup">Sign Up Free</a>
   </div>
+</div>
+<header class="header-main">
+  <a href="#" class="hm-logo">
+    <div class="hm-badge">TC</div>
+    <div class="hm-words">
+      <div class="w1">Treasure Courier</div>
+      <div class="w2">Services Ltd &nbsp;·&nbsp; Shop Online. We Deliver.</div>
+    </div>
+  </a>
+  <nav class="hm-nav">
+    <a href="#">Home</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#services">Services</a>
+    <a href="#locations">Locations</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="#contact" class="hm-cta">Get a Quote</a>
+  <button class="hm-ham" onclick="document.querySelector('.mob-nav').classList.toggle('open')">☰</button>
+</header>
+<div class="mob-nav">
+  <a href="#" onclick="this.closest('.mob-nav').classList.remove('open')">Home</a>
+  <a href="#how-it-works" onclick="this.closest('.mob-nav').classList.remove('open')">How It Works</a>
+  <a href="#services" onclick="this.closest('.mob-nav').classList.remove('open')">Services</a>
+  <a href="#locations" onclick="this.closest('.mob-nav').classList.remove('open')">Locations</a>
+  <a href="#contact" onclick="this.closest('.mob-nav').classList.remove('open')">Get a Quote</a>
+</div>
 
-  <div class="contact">
-    <div class="form-wrap">
-      <div class="form-heading">Send Us a <span>Message</span></div>
-      <form class="cform" name="contact" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact" />
-        <div class="form-row">
-          <div class="fg">
-            <label>First Name</label>
-            <input type="text" name="first_name" placeholder="First name" required />
-          </div>
-          <div class="fg">
-            <label>Last Name</label>
-            <input type="text" name="last_name" placeholder="Last name" />
-          </div>
-        </div>
-        <div class="fg">
-          <label>Email Address</label>
-          <input type="email" name="email" placeholder="you@example.com" required />
-        </div>
-        <div class="fg">
-          <label>Phone Number</label>
-          <input type="tel" name="phone" placeholder="+1 (876) 000-0000" />
-        </div>
-        <div class="fg">
-          <label>Service Required</label>
-          <select name="service">
-            <option value="">Select a service…</option>
-            <option>Air Freight – Miami to Jamaica</option>
-            <option>Sea Cargo – Miami to Jamaica</option>
-            <option>Door-to-Door Delivery</option>
-            <option>Customs Clearance</option>
-            <option>Package Consolidation</option>
-            <option>General Inquiry</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label>Message</label>
-          <textarea name="message" placeholder="Tell us about your shipment — weight, size, contents…"></textarea>
-        </div>
-        <div class="btn-row">
-          <button type="submit" class="btn-submit">Send Message</button>
-          <a href="https://wa.me/18768212068" target="_blank" class="btn-whatsapp">
-            <span class="wa-icon">💬</span> WhatsApp
-          </a>
-        </div>
-      </form>
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-left">
+    <div class="h-eyebrow">✈ Miami → Kingston · 3 Flights Per Week</div>
+    <h1 class="h-title">
+      SHOP<br>
+      <span class="gld">ONLINE.</span><br>
+      <span class="out">WE DELIVER.</span>
+    </h1>
+    <p class="h-sub">Jamaica's trusted courier service. We ship from any US store directly to your door — fast, affordable, and reliable every time.</p>
+    <div class="h-btns">
+      <a href="#contact" class="btn-gold">Start Shipping Today</a>
+      <a href="#how-it-works" class="btn-ghost">How It Works</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <canvas id="globeCanvas"></canvas>
+  </div>
+</section>
 
-      <div id="success-msg" style="display:none; text-align:center; padding: 32px 0;">
-        <div style="font-size:48px; margin-bottom:16px;">✅</div>
-        <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--navy); letter-spacing:1px;">Message Sent!</div>
-        <p style="font-size:14px; color:#4a5f80; margin-top:8px; line-height:1.6;">Thanks for reaching out. The Treasure Courier team will get back to you shortly.</p>
+<!-- ═══════════════════════ STATS ═══════════════════════ -->
+<div class="stats">
+  <div class="si"><span class="si-icon">💰</span><div><div class="si-num">$5</div><div class="si-lbl">USD per lb</div></div></div>
+  <div class="si"><span class="si-icon">🎁</span><div><div class="si-num">15%</div><div class="si-lbl">Off First Shipment</div></div></div>
+  <div class="si"><span class="si-icon">✈</span><div><div class="si-num">3×</div><div class="si-lbl">Flights Per Week</div></div></div>
+  <div class="si"><span class="si-icon">🤝</span><div><div class="si-num">5%</div><div class="si-lbl">Referral Discount</div></div></div>
+</div>
+
+<!-- ═══════════════════════ LIFESTYLE BANNER ═══════════════════════ -->
+<div class="lbanner">
+  <div class="lbanner-img" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1800&q=80')"></div>
+  <div class="lbanner-overlay"></div>
+  <div class="lbanner-content">
+    <div>
+      <h2>SHOP FROM THE US.<br><span>WE BRING IT HOME.</span></h2>
+      <p>From Amazon to Walmart, any US store — we get your packages safely to Jamaica's doorstep with speed and care.</p>
+    </div>
+    <div class="lbanner-right">
+      <a href="#contact" class="btn-gold">Start Shipping Today</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ HOW IT WORKS ═══════════════════════ -->
+<section class="hiw" id="how-it-works">
+  <div class="con">
+    <p class="sec-ey rv">Simple Process</p>
+    <h2 class="sec-h rv">AS EASY AS <span>1, 2, 3</span></h2>
+    <p class="sec-p rv">Get packages from any US store shipped straight to your door in Jamaica.</p>
+    <div class="hiw-grid">
+      <div class="hc rv">
+        <div class="hc-num-bg">1</div>
+        <div class="hc-top">
+          <span class="hc-step">Step 01</span>
+          <span class="hc-ico">📋</span>
+        </div>
+        <div class="hc-body">
+          <h3>Create a Free Account</h3>
+          <p>Sign up at no cost and receive your personal US mailbox address. Use it as your shipping destination on any US online store.</p>
+        </div>
+      </div>
+      <div class="hc rv">
+        <div class="hc-num-bg">2</div>
+        <div class="hc-top">
+          <span class="hc-step">Step 02</span>
+          <span class="hc-ico">🛍️</span>
+        </div>
+        <div class="hc-body">
+          <h3>Shop Any US Store</h3>
+          <p>Browse Amazon, Walmart, Nike — any US retailer. Enter your Treasure Courier Miami address at checkout and we'll receive it for you.</p>
+        </div>
+      </div>
+      <div class="hc rv">
+        <div class="hc-num-bg">3</div>
+        <div class="hc-top">
+          <span class="hc-step">Step 03</span>
+          <span class="hc-ico">🚪</span>
+        </div>
+        <div class="hc-body">
+          <h3>We Deliver To You</h3>
+          <p>We handle customs clearance and deliver straight to your door anywhere in Jamaica. You choose — store pickup or home delivery.</p>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <footer>
-    <p>© 2025 <span>Treasure Courier Services Ltd</span> · All rights reserved · treasurecourier.com</p>
-  </footer>
+<!-- ═══════════════════════ SERVICES ═══════════════════════ -->
+<section class="svc" id="services">
+  <div class="con" style="position:relative;z-index:1;">
+    <p class="sec-ey rv">What We Offer</p>
+    <h2 class="sec-h rv">OUR <span>SERVICES</span></h2>
+    <p class="sec-p rv">Complete end-to-end shipping solutions for individuals and businesses across Jamaica.</p>
+    <div class="svc-grid">
+      <div class="sc rv">
+        <div class="sc-ico">✈️</div>
+        <h3>Air Freight</h3>
+        <p>Three dedicated weekly flights from Miami. Your packages move fast — warehouse to hands in days, not weeks.</p>
+        <a href="#contact" class="sc-lnk">Get a quote →</a>
+      </div>
+      <div class="sc rv">
+        <div class="sc-ico">🚢</div>
+        <h3>Sea Cargo</h3>
+        <p>Economical ocean freight for bulk orders. Ideal for large shipments and heavy goods at the best possible rate.</p>
+        <a href="#contact" class="sc-lnk">Get a quote →</a>
+      </div>
+      <div class="sc rv">
+        <div class="sc-ico">🚪</div>
+        <h3>Door-to-Door</h3>
+        <p>True end-to-end service. We receive, ship, clear customs, and deliver right to your address in Jamaica.</p>
+        <a href="#contact" class="sc-lnk">Get a quote →</a>
+      </div>
+      <div class="sc rv">
+        <div class="sc-ico">🛃</div>
+        <h3>Custom Clearance</h3>
+        <p>Our experienced brokers handle all Jamaican customs documentation and duties — fast, accurate, stress-free.</p>
+        <a href="#contact" class="sc-lnk">Get a quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    const form = document.querySelector('form[name="contact"]');
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = form.querySelector('.btn-submit');
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
-      try {
-        await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(new FormData(form)).toString()
-        });
-        form.style.display = 'none';
-        document.getElementById('success-msg').style.display = 'block';
-      } catch(err) {
-        btn.textContent = 'Send Message';
-        btn.disabled = false;
-        alert('Something went wrong. Please try WhatsApp or call us directly.');
+<!-- ═══════════════════════ WHY US / LOCATIONS ═══════════════════════ -->
+<section class="why" id="locations">
+  <div class="con">
+    <p class="sec-ey rv">Why Choose Us</p>
+    <h2 class="sec-h rv">TRUSTED. FAST. <span>RELIABLE.</span></h2>
+    <div class="why-inner">
+      <div class="why-list rv">
+        <div class="wi">
+          <div class="wi-ico">🔒</div>
+          <div><h4>Safe &amp; Insured Handling</h4><p>Every shipment is secured and insured from our Miami warehouse all the way to your front door.</p></div>
+        </div>
+        <div class="wi">
+          <div class="wi-ico">📅</div>
+          <div><h4>Reliable Flight Schedule</h4><p>3 confirmed weekly flights — you always know exactly when your package is on its way.</p></div>
+        </div>
+        <div class="wi">
+          <div class="wi-ico">📦</div>
+          <div><h4>Package Consolidation</h4><p>Combine multiple orders into a single shipment to save significantly on shipping costs.</p></div>
+        </div>
+        <div class="wi">
+          <div class="wi-ico">📍</div>
+          <div>
+            <h4>Our Locations</h4>
+            <p>
+              <b>Kingston:</b> Shop #3, 59A Waltham Park Rd (Corner Waltham &amp; Hagley Park), Kgn 11<br/>
+              <b>Miami Air:</b> 6316 NW 97th Ave Unit 5, Doral, FL 33178<br/>
+              <b>Miami Sea:</b> 8408 NW 66th St, Miami, FL 33166
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="why-stats rv">
+        <div class="ws ws-gold">
+          <div class="ws-num">$5</div>
+          <div><h4>Per Pound Rate</h4><p>USD — among the lowest rates for Miami–Jamaica air shipping</p></div>
+        </div>
+        <div class="ws ws-dark">
+          <div class="ws-num">15%</div>
+          <div><h4>First Shipment Off</h4><p>New customers get 15% off their very first shipment with us</p></div>
+        </div>
+        <div class="ws ws-blue">
+          <div class="ws-num">3×</div>
+          <div><h4>Flights Weekly</h4><p>Three scheduled flights every week from Miami to Kingston</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERRAL BANNER -->
+<div class="refbanner">
+  <div class="refbanner-inner">
+    <div class="ref-text rv">
+      <h2>BRING A FRIEND,<br><span>BOTH SAVE 5%</span></h2>
+      <p>When your friend signs up using your referral, you both receive an extra 5% discount on your next shipment. Share the love, save more.</p>
+    </div>
+    <div class="ref-badge rv">
+      <div class="pct">5%</div>
+      <div class="lbl">Extra Discount<br/>Per Referral</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CONTACT ═══════════════════════ -->
+<section class="contact" id="contact">
+  <div class="con">
+    <p class="sec-ey rv">Get in Touch</p>
+    <h2 class="sec-h rv">SEND US A <span>MESSAGE</span></h2>
+    <div class="contact-inner">
+      <div class="c-cards rv">
+        <div class="cc"><div class="cc-ico">📞</div><div><div class="cc-lbl">Call Us</div><div class="cc-val"><a href="tel:+18768212068">876-821-2068</a><br/><a href="tel:+18767570564">876-757-0564</a></div></div></div>
+        <div class="cc"><div class="cc-ico">✉️</div><div><div class="cc-lbl">Email</div><div class="cc-val"><a href="mailto:treasurecourierservicesltd@gmail.com">treasurecourierservicesltd@gmail.com</a></div></div></div>
+        <div class="cc"><div class="cc-ico">📍</div><div><div class="cc-lbl">Jamaica Office</div><div class="cc-val">Shop #3, 59A Waltham Park Road<span class="cc-sub">Corner of Waltham &amp; Hagley Park · Kingston 11</span></div></div></div>
+        <div class="cc"><div class="cc-ico">🏭</div><div><div class="cc-lbl">Miami — Air Warehouse</div><div class="cc-val">6316 NW 97th Ave, Unit 5<span class="cc-sub">Doral, FL 33178 · United States</span></div></div></div>
+        <div class="cc"><div class="cc-ico">🚢</div><div><div class="cc-lbl">Miami — Sea Warehouse</div><div class="cc-val">8408 NW 66th Street<span class="cc-sub">Miami, FL 33166 · United States</span></div></div></div>
+      </div>
+      <div class="fpanel rv">
+        <h3>Send a <span>Message</span></h3>
+        <form class="cform" name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact"/>
+          <div class="frow">
+            <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="First name" required/></div>
+            <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Last name"/></div>
+          </div>
+          <div class="fg"><label>Email Address</label><input type="email" name="email" placeholder="you@example.com" required/></div>
+          <div class="fg"><label>Phone Number</label><input type="tel" name="phone" placeholder="+1 (876) 000-0000"/></div>
+          <div class="fg">
+            <label>Service Required</label>
+            <select name="service">
+              <option value="">Select a service…</option>
+              <option>Air Freight – Miami to Jamaica</option>
+              <option>Sea Cargo – Miami to Jamaica</option>
+              <option>Door-to-Door Delivery</option>
+              <option>Customs Clearance</option>
+              <option>Package Consolidation</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+          <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell us about your shipment — weight, size, contents…"></textarea></div>
+          <div class="f-note">🎁 New customer? Mention this form and get <strong>15% OFF</strong> your first shipment.</div>
+          <div class="brow">
+            <button type="submit" class="fsub">Send Message</button>
+            <a href="https://wa.me/18768212068" target="_blank" class="fwa">💬 WhatsApp</a>
+          </div>
+        </form>
+        <div id="ok">
+          <div class="tick">✅</div>
+          <h4>Message Sent!</h4>
+          <p>The Treasure Courier team will get back to you shortly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="ft">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ft-logo">TREASURE <span>COURIER</span> SERVICES LTD</div>
+        <p>Fast, reliable shipping from Miami to Jamaica. Shop online — we handle the rest, from our warehouse to your door.</p>
+        <div class="ft-socs">
+          <a href="#" class="fts" title="Facebook">📘</a>
+          <a href="#" class="fts" title="Instagram">📸</a>
+          <a href="https://wa.me/18768212068" class="fts" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#locations">Locations</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Air Freight</a></li>
+          <li><a href="#services">Sea Cargo</a></li>
+          <li><a href="#services">Door-to-Door</a></li>
+          <li><a href="#services">Custom Clearance</a></li>
+          <li><a href="#services">Consolidation</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><span>876-821-2068</span></li>
+          <li><span>876-757-0564</span></li>
+          <li><a href="mailto:treasurecourierservicesltd@gmail.com">Email Us</a></li>
+          <li><span>Kingston 11, Jamaica</span></li>
+          <li><span>Doral, Miami FL</span></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="fdiv"/>
+    <div class="ftbtm">
+      <p>© 2025 <span>Treasure Courier Services Ltd</span>. All rights reserved.</p>
+      <p>treasurecourier.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+/* ═══════════════════════ GLOBE ═══════════════════════ */
+(async function(){
+  const canvas = document.getElementById('globeCanvas');
+  const ctx = canvas.getContext('2d');
+  const DPR = window.devicePixelRatio || 1;
+
+  function resize(){
+    const s = canvas.offsetWidth;
+    canvas.width = s * DPR;
+    canvas.height = s * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  resize();
+
+  const SIZE = canvas.offsetWidth;
+  const cx = SIZE/2, cy = SIZE/2;
+  const R = SIZE * 0.41;
+
+  const MIAMI    = { lat:25.8, lon:-80.2, label:'Miami, FL',    color:'#f5a800' };
+  const KINGSTON = { lat:18.0, lon:-76.8, label:'Kingston, JA', color:'#4ade80' };
+
+  // d3 orthographic projection — center on Caribbean
+  const projection = d3.geoOrthographic()
+    .scale(R)
+    .translate([cx, cy])
+    .clipAngle(90)
+    .rotate([78, -20, 0]);
+
+  const pathGen = d3.geoPath().projection(projection).context(ctx);
+  const graticule = d3.geoGraticule()();
+  const sphere = {type:'Sphere'};
+
+  // Great-circle arc feature Miami → Kingston
+  const flightLine = {
+    type:'Feature',
+    geometry:{ type:'LineString', coordinates:[
+      [MIAMI.lon, MIAMI.lat], [KINGSTON.lon, KINGSTON.lat]
+    ]}
+  };
+
+  // Great circle interpolation for plane + raised arc
+  function gcInterp(lat1,lon1,lat2,lon2,t){
+    const r=Math.PI/180;
+    const p1=[Math.cos(lat1*r)*Math.cos(lon1*r),Math.sin(lat1*r),Math.cos(lat1*r)*Math.sin(lon1*r)];
+    const p2=[Math.cos(lat2*r)*Math.cos(lon2*r),Math.sin(lat2*r),Math.cos(lat2*r)*Math.sin(lon2*r)];
+    const dot=Math.min(1,p1[0]*p2[0]+p1[1]*p2[1]+p1[2]*p2[2]);
+    const d=Math.acos(Math.max(-1,dot));
+    if(d<1e-5) return [lon1,lat1];
+    const sd=Math.sin(d),a=Math.sin((1-t)*d)/sd,b=Math.sin(t*d)/sd;
+    const px=a*p1[0]+b*p2[0],py=a*p1[1]+b*p2[1],pz=a*p1[2]+b*p2[2];
+    return [Math.atan2(pz,px)/r, Math.asin(py)/r];
+  }
+
+  // Fetch world topology
+  let countries = null, land = null;
+  try {
+    const world = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r=>r.json());
+    countries = topojson.feature(world, world.objects.countries);
+    land = topojson.mesh(world, world.objects.countries, (a,b)=>a!==b);
+  } catch(e){ console.warn('World data unavailable, running without continents'); }
+
+  let planeT = 0;
+  let animTime = 0;
+
+  function draw(){
+    ctx.clearRect(0, 0, SIZE, SIZE);
+    animTime = Date.now();
+
+    // Gentle oscillation — keep Caribbean centred
+    const rotLon = 78 + Math.sin(animTime * 0.00025) * 12;
+    projection.rotate([rotLon, -20, 0]);
+
+    // ── Atmosphere glow ──
+    const atmo = ctx.createRadialGradient(cx,cy,R*0.88,cx,cy,R*1.18);
+    atmo.addColorStop(0,'rgba(40,100,255,0)');
+    atmo.addColorStop(0.6,'rgba(40,100,255,0.14)');
+    atmo.addColorStop(1,'rgba(40,100,255,0)');
+    ctx.beginPath(); pathGen(sphere); ctx.save();
+    ctx.beginPath(); ctx.arc(cx,cy,R*1.18,0,Math.PI*2);
+    ctx.fillStyle=atmo; ctx.fill(); ctx.restore();
+
+    // ── Ocean sphere ──
+    const sph = ctx.createRadialGradient(cx-R*.28,cy-R*.32,R*.04,cx,cy,R);
+    sph.addColorStop(0,'rgba(30,80,190,0.55)');
+    sph.addColorStop(0.5,'rgba(10,28,110,0.5)');
+    sph.addColorStop(1,'rgba(3,9,40,0.65)');
+    ctx.beginPath(); pathGen(sphere);
+    ctx.fillStyle=sph; ctx.fill();
+
+    // ── Edge highlight ring ──
+    ctx.beginPath(); pathGen(sphere);
+    ctx.strokeStyle='rgba(90,150,255,0.5)'; ctx.lineWidth=R*0.022; ctx.stroke();
+
+    // ── Graticule grid ──
+    ctx.beginPath(); pathGen(graticule);
+    ctx.strokeStyle='rgba(80,140,255,0.13)'; ctx.lineWidth=0.6; ctx.stroke();
+
+    // ── Continents (land fill) ──
+    if(countries){
+      ctx.beginPath(); pathGen(countries);
+      ctx.fillStyle='rgba(50,100,200,0.35)'; ctx.fill();
+      // Continent coastlines
+      ctx.beginPath(); pathGen(land || countries);
+      ctx.strokeStyle='rgba(110,170,255,0.55)'; ctx.lineWidth=0.9; ctx.stroke();
+    }
+
+    // ── Caribbean highlight glow ──
+    const carib = projection([-75, 20]);
+    if(carib){
+      const cg = ctx.createRadialGradient(carib[0],carib[1],0,carib[0],carib[1],R*0.35);
+      cg.addColorStop(0,'rgba(80,160,255,0.12)');
+      cg.addColorStop(1,'rgba(80,160,255,0)');
+      ctx.beginPath(); ctx.arc(carib[0],carib[1],R*0.35,0,Math.PI*2);
+      ctx.fillStyle=cg; ctx.fill();
+    }
+
+    // ── Flight route — raised arc ──
+    const N = 100;
+    const arcPts = [];
+    for(let i=0;i<=N;i++){
+      const t=i/N;
+      const [lon,lat] = gcInterp(MIAMI.lat,MIAMI.lon,KINGSTON.lat,KINGSTON.lon,t);
+      const xy = projection([lon,lat]);
+      if(xy){
+        // Push outward from globe centre for a lifted 3D arc feel
+        const lift = Math.sin(t*Math.PI) * R * 0.22;
+        const dx = xy[0]-cx, dy = xy[1]-cy;
+        const dist = Math.sqrt(dx*dx+dy*dy)||1;
+        arcPts.push({ x: xy[0]+(dx/dist)*lift, y: xy[1]+(dy/dist)*lift, t });
       }
-    });
-  </script>
+    }
+
+    if(arcPts.length > 2){
+      // Layer 1 — wide outer glow
+      ctx.beginPath();
+      arcPts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+      ctx.strokeStyle='rgba(245,168,0,0.12)'; ctx.lineWidth=28; ctx.lineCap='round'; ctx.stroke();
+
+      // Layer 2 — mid glow
+      ctx.beginPath();
+      arcPts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+      ctx.strokeStyle='rgba(245,168,0,0.22)'; ctx.lineWidth=14; ctx.stroke();
+
+      // Layer 3 — dashed gold core
+      ctx.save();
+      ctx.setLineDash([10,7]);
+      ctx.lineDashOffset = -(animTime*0.04 % 17); // animated dash motion
+      ctx.beginPath();
+      arcPts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+      ctx.strokeStyle='rgba(245,168,0,0.95)'; ctx.lineWidth=3.5; ctx.stroke();
+      ctx.restore();
+    }
+
+    // ── City markers ──
+    function drawCity(loc){
+      const xy = projection([loc.lon, loc.lat]);
+      if(!xy) return;
+      const [px,py] = xy;
+
+      // Pulse ring
+      const pulse = (animTime % 2200)/2200;
+      ctx.beginPath(); ctx.arc(px,py, R*0.028+R*0.06*pulse, 0,Math.PI*2);
+      ctx.strokeStyle=`${loc.color}${Math.round((1-pulse)*180).toString(16).padStart(2,'0')}`;
+      ctx.lineWidth=1.5; ctx.stroke();
+
+      // Glow halo
+      const g=ctx.createRadialGradient(px,py,0,px,py,R*0.065);
+      g.addColorStop(0,loc.color+'cc'); g.addColorStop(1,loc.color+'00');
+      ctx.beginPath(); ctx.arc(px,py,R*0.065,0,Math.PI*2);
+      ctx.fillStyle=g; ctx.fill();
+
+      // Core dot
+      ctx.beginPath(); ctx.arc(px,py,R*0.024,0,Math.PI*2);
+      ctx.fillStyle=loc.color; ctx.fill();
+      ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke();
+
+      // Label
+      ctx.font=`700 ${R*0.083}px Barlow,sans-serif`;
+      ctx.fillStyle='#fff';
+      ctx.shadowColor='rgba(0,0,0,0.95)'; ctx.shadowBlur=8;
+      ctx.fillText(loc.label, px+R*0.045, py-R*0.04);
+      ctx.shadowBlur=0;
+    }
+    drawCity(MIAMI);
+    drawCity(KINGSTON);
+
+    // ── Animated plane ──
+    if(arcPts.length > 2){
+      const idx = Math.min(Math.floor(planeT * arcPts.length), arcPts.length-2);
+      const pp = arcPts[idx], np = arcPts[idx+1];
+      const angle = Math.atan2(np.y-pp.y, np.x-pp.x);
+      const pSize = R * 0.13;
+
+      ctx.save();
+      ctx.translate(pp.x, pp.y);
+      ctx.rotate(angle);
+
+      // Plane glow
+      const pg=ctx.createRadialGradient(0,0,0,0,0,pSize*1.5);
+      pg.addColorStop(0,'rgba(255,220,80,0.5)'); pg.addColorStop(1,'rgba(255,220,80,0)');
+      ctx.beginPath(); ctx.arc(0,0,pSize*1.5,0,Math.PI*2);
+      ctx.fillStyle=pg; ctx.fill();
+
+      // Plane shadow
+      ctx.font=`${pSize*2}px sans-serif`;
+      ctx.fillStyle='rgba(0,0,0,0.35)';
+      ctx.fillText('✈', -pSize*0.85+3, pSize*0.75+3);
+      // Plane
+      ctx.fillStyle='#ffffff';
+      ctx.shadowColor='rgba(245,200,0,1)'; ctx.shadowBlur=16;
+      ctx.fillText('✈', -pSize*0.85, pSize*0.75);
+      ctx.shadowBlur=0;
+      ctx.restore();
+
+      planeT = (planeT + 0.003) % 1;
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ═══════════════════════ SCROLL REVEAL ═══════════════════════ */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('in'),i*80); io.unobserve(e.target); }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ═══════════════════════ FORM SUBMIT ═══════════════════════ */
+const form=document.querySelector('form[name="contact"]');
+form.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const btn=form.querySelector('.fsub');
+  btn.textContent='Sending…'; btn.disabled=true;
+  try{
+    await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
+    form.style.display='none';
+    document.getElementById('ok').style.display='block';
+  }catch{
+    btn.textContent='Send Message'; btn.disabled=false;
+    alert('Something went wrong. Please WhatsApp or call us directly.');
+  }
+});
+</script>
 </body>
 </html>
