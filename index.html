@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Treasure Courier Services Ltd – Shop Online. We Deliver.</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='32' fill='%23f5a800'/><text x='32' y='44' font-family='Arial Black,sans-serif' font-size='26' font-weight='900' text-anchor='middle' fill='%230e2a6e'>TC</text></svg>"/>
 <meta name="description" content="Fast, reliable air and sea shipping from Miami to Jamaica. USD $5/lb. 3 flights per week. Door to door delivery."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
@@ -982,7 +983,9 @@ hr.fdiv{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:22p
     land = topojson.mesh(world, world.objects.countries, (a,b)=>a!==b);
   } catch(e){ console.warn('World data unavailable, running without continents'); }
 
+  const SHANGHAI = { lat:31.2, lon:121.5, label:'China', color:'#38bdf8' };
   let planeT = 0;
+  let shipT  = 0.4; // offset start so ship and plane don't overlap
   let animTime = 0;
 
   function draw(){
@@ -1107,7 +1110,7 @@ hr.fdiv{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:22p
     drawCity(MIAMI);
     drawCity(KINGSTON);
 
-    // ── Animated plane ──
+    // ── Animated plane (gold — air route) ──
     if(arcPts.length > 2){
       const idx = Math.min(Math.floor(planeT * arcPts.length), arcPts.length-2);
       const pp = arcPts[idx], np = arcPts[idx+1];
@@ -1118,17 +1121,14 @@ hr.fdiv{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:22p
       ctx.translate(pp.x, pp.y);
       ctx.rotate(angle);
 
-      // Plane glow
       const pg=ctx.createRadialGradient(0,0,0,0,0,pSize*1.5);
       pg.addColorStop(0,'rgba(255,220,80,0.5)'); pg.addColorStop(1,'rgba(255,220,80,0)');
       ctx.beginPath(); ctx.arc(0,0,pSize*1.5,0,Math.PI*2);
       ctx.fillStyle=pg; ctx.fill();
 
-      // Plane shadow
       ctx.font=`${pSize*2}px sans-serif`;
       ctx.fillStyle='rgba(0,0,0,0.35)';
       ctx.fillText('✈', -pSize*0.85+3, pSize*0.75+3);
-      // Plane
       ctx.fillStyle='#ffffff';
       ctx.shadowColor='rgba(245,200,0,1)'; ctx.shadowBlur=16;
       ctx.fillText('✈', -pSize*0.85, pSize*0.75);
