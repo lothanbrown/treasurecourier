@@ -198,7 +198,7 @@ body{font-family:'Barlow',sans-serif;color:var(--TXT);background:var(--W);overfl
     padding:18px 16px;
     border-right:none;
     border-bottom:1px solid rgba(12,31,94,.15);
-    justify-content:center;
+    justify-content:flex-start;
   }
   .si:nth-child(odd){border-right:1px solid rgba(12,31,94,.15);}
   .si:nth-last-child(-n+2){border-bottom:none;}
@@ -958,7 +958,7 @@ hr.fdiv{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:22p
   const MIAMI    = { lat:25.8, lon:-80.2, label:'Miami, FL',    color:'#f5a800' };
   const KINGSTON = { lat:18.0, lon:-76.8, label:'Kingston, JA', color:'#4ade80' };
 
-  // d3 orthographic projection — center on Caribbean
+  // d3 orthographic — centred on Caribbean
   const projection = d3.geoOrthographic()
     .scale(R)
     .translate([cx, cy])
@@ -999,17 +999,17 @@ hr.fdiv{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:22p
   } catch(e){ console.warn('World data unavailable, running without continents'); }
 
   const SHANGHAI = { lat:31.2, lon:121.5, label:'China', color:'#38bdf8' };
-  let planeT = 0;
-  let shipT  = 0.4; // offset start so ship and plane don't overlap
-  let animTime = 0;
+
+  let activeRoute = 'air'; // 'air' | 'sea'
+  let routeT      = 0;
+  let animTime    = 0;
 
   function draw(){
     ctx.clearRect(0, 0, SIZE, SIZE);
     animTime = Date.now();
 
-    // Gentle oscillation — keep Caribbean centred
-    const rotLon = 78 + Math.sin(animTime * 0.00025) * 12;
-    projection.rotate([rotLon, -20, 0]);
+    // Locked on Caribbean
+    projection.rotate([78, -20, 0]);
 
     // ── Atmosphere glow ──
     const atmo = ctx.createRadialGradient(cx,cy,R*0.88,cx,cy,R*1.18);
@@ -1055,102 +1055,176 @@ hr.fdiv{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:22p
       ctx.fillStyle=cg; ctx.fill();
     }
 
-    // ── Flight route — raised arc ──
+    // ── Build arc points ──
     const N = 100;
-    const arcPts = [];
+    const airPts = [];
     for(let i=0;i<=N;i++){
       const t=i/N;
-      const [lon,lat] = gcInterp(MIAMI.lat,MIAMI.lon,KINGSTON.lat,KINGSTON.lon,t);
-      const xy = projection([lon,lat]);
+      const [lon,lat]=gcInterp(MIAMI.lat,MIAMI.lon,KINGSTON.lat,KINGSTON.lon,t);
+      const xy=projection([lon,lat]);
       if(xy){
-        // Push outward from globe centre for a lifted 3D arc feel
-        const lift = Math.sin(t*Math.PI) * R * 0.22;
-        const dx = xy[0]-cx, dy = xy[1]-cy;
-        const dist = Math.sqrt(dx*dx+dy*dy)||1;
-        arcPts.push({ x: xy[0]+(dx/dist)*lift, y: xy[1]+(dy/dist)*lift, t });
+        const lift=Math.sin(t*Math.PI)*R*0.22;
+        const dx=xy[0]-cx,dy=xy[1]-cy,dist=Math.sqrt(dx*dx+dy*dy)||1;
+        airPts.push({x:xy[0]+(dx/dist)*lift,y:xy[1]+(dy/dist)*lift,t});
       }
     }
 
-    if(arcPts.length > 2){
-      // Layer 1 — wide outer glow
-      ctx.beginPath();
-      arcPts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
-      ctx.strokeStyle='rgba(245,168,0,0.12)'; ctx.lineWidth=28; ctx.lineCap='round'; ctx.stroke();
+    const SEA_WAYPOINTS=[
+      [121.5, 31.2],  // Shanghai
+      [145,   25  ],  // East of Japan, heading SE
+      [175,   15  ],  // Mid Pacific
+      [-150,  10  ],  // East Pacific
+      [-100,   8  ],  // Approaching Central America
+      [-85,    8  ],  // Gulf of Panama
+      [-79.5,  9  ],  // Panama Canal — Pacific entrance
+      [-79.9,  9.4],  // Panama Canal — Caribbean exit (Colón)
+      [-77,   13  ],  // Caribbean Sea
+      [-76.8, 18  ],  // Kingston
+    ];
+    function multiGC(wps,t){
+      const n=wps.length-1;
+      const seg=Math.min(Math.floor(t*n),n-1);
+      const st=t*n-seg;
+      const [lo1,la1]=wps[seg],[lo2,la2]=wps[seg+1];
+      return gcInterp(la1,lo1,la2,lo2,st);
+    }
 
-      // Layer 2 — mid glow
-      ctx.beginPath();
-      arcPts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
-      ctx.strokeStyle='rgba(245,168,0,0.22)'; ctx.lineWidth=14; ctx.stroke();
+    // Build segmented arc — breaks path when route goes behind globe
+    // so no cross-globe lines when Pacific portion dips behind the visible face
+    const seaSegments=[];
+    let curSeg=[];
+    for(let i=0;i<=N;i++){
+      const t=i/N;
+      const [lon,lat]=multiGC(SEA_WAYPOINTS,t);
+      const xy=projection([lon,lat]);
+      if(xy){
+        const lift=Math.sin(t*Math.PI)*R*0.12;
+        const dx=xy[0]-cx,dy=xy[1]-cy,dist=Math.sqrt(dx*dx+dy*dy)||1;
+        curSeg.push({x:xy[0]+(dx/dist)*lift,y:xy[1]+(dy/dist)*lift,t});
+      } else {
+        if(curSeg.length>1) seaSegments.push(curSeg);
+        curSeg=[];
+      }
+    }
+    if(curSeg.length>1) seaSegments.push(curSeg);
 
-      // Layer 3 — dashed gold core
+    const airActive = activeRoute==='air';
+    const seaActive = activeRoute==='sea';
+    const airAlpha  = airActive ? 1 : 0.2;
+    const seaAlpha  = seaActive ? 1 : 0.2;
+
+    // ── Draw air arc ──
+    if(airPts.length>2){
+      ctx.beginPath();
+      airPts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+      ctx.strokeStyle=`rgba(245,168,0,${0.12*airAlpha})`; ctx.lineWidth=28; ctx.lineCap='round'; ctx.stroke();
+      ctx.beginPath();
+      airPts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+      ctx.strokeStyle=`rgba(245,168,0,${0.22*airAlpha})`; ctx.lineWidth=14; ctx.stroke();
       ctx.save();
       ctx.setLineDash([10,7]);
-      ctx.lineDashOffset = -(animTime*0.04 % 17); // animated dash motion
+      ctx.lineDashOffset=airActive?-(animTime*0.04%17):0;
       ctx.beginPath();
-      arcPts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
-      ctx.strokeStyle='rgba(245,168,0,0.95)'; ctx.lineWidth=3.5; ctx.stroke();
+      airPts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+      ctx.strokeStyle=`rgba(245,168,0,${0.9*airAlpha})`; ctx.lineWidth=3.5; ctx.stroke();
+      ctx.restore();
+    }
+
+    // ── Draw sea arc (segmented) ──
+    if(seaSegments.length>0){
+      const drawSeaArc=(lw,color)=>{
+        seaSegments.forEach(seg=>{
+          ctx.beginPath();
+          seg.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+          ctx.strokeStyle=color; ctx.lineWidth=lw; ctx.lineCap='round'; ctx.stroke();
+        });
+      };
+      drawSeaArc(22,`rgba(56,189,248,${0.1*seaAlpha})`);
+      drawSeaArc(10,`rgba(56,189,248,${0.2*seaAlpha})`);
+      ctx.save();
+      ctx.setLineDash([6,10]);
+      ctx.lineDashOffset=seaActive?-(animTime*0.018%16):0;
+      seaSegments.forEach(seg=>{
+        ctx.beginPath();
+        seg.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+        ctx.strokeStyle=`rgba(56,189,248,${0.85*seaAlpha})`; ctx.lineWidth=2.5; ctx.stroke();
+      });
       ctx.restore();
     }
 
     // ── City markers ──
-    function drawCity(loc){
-      const xy = projection([loc.lon, loc.lat]);
+    function drawCity(loc,alwaysShow){
+      const xy=projection([loc.lon,loc.lat]);
       if(!xy) return;
-      const [px,py] = xy;
-
-      // Pulse ring
-      const pulse = (animTime % 2200)/2200;
-      ctx.beginPath(); ctx.arc(px,py, R*0.028+R*0.06*pulse, 0,Math.PI*2);
+      const [px,py]=xy;
+      const pulse=(animTime%2200)/2200;
+      ctx.beginPath(); ctx.arc(px,py,R*0.028+R*0.06*pulse,0,Math.PI*2);
       ctx.strokeStyle=`${loc.color}${Math.round((1-pulse)*180).toString(16).padStart(2,'0')}`;
       ctx.lineWidth=1.5; ctx.stroke();
-
-      // Glow halo
       const g=ctx.createRadialGradient(px,py,0,px,py,R*0.065);
       g.addColorStop(0,loc.color+'cc'); g.addColorStop(1,loc.color+'00');
       ctx.beginPath(); ctx.arc(px,py,R*0.065,0,Math.PI*2);
       ctx.fillStyle=g; ctx.fill();
-
-      // Core dot
       ctx.beginPath(); ctx.arc(px,py,R*0.024,0,Math.PI*2);
       ctx.fillStyle=loc.color; ctx.fill();
       ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke();
-
-      // Label
       ctx.font=`700 ${R*0.083}px Barlow,sans-serif`;
       ctx.fillStyle='#fff';
       ctx.shadowColor='rgba(0,0,0,0.95)'; ctx.shadowBlur=8;
-      ctx.fillText(loc.label, px+R*0.045, py-R*0.04);
+      ctx.fillText(loc.label,px+R*0.045,py-R*0.04);
       ctx.shadowBlur=0;
     }
     drawCity(MIAMI);
     drawCity(KINGSTON);
 
-    // ── Animated plane (gold — air route) ──
-    if(arcPts.length > 2){
-      const idx = Math.min(Math.floor(planeT * arcPts.length), arcPts.length-2);
-      const pp = arcPts[idx], np = arcPts[idx+1];
-      const angle = Math.atan2(np.y-pp.y, np.x-pp.x);
-      const pSize = R * 0.13;
+    // ── Active vehicle — position tracked geographically, not by array index ──
+    if(airActive){
+      const [vLon,vLat] = gcInterp(MIAMI.lat,MIAMI.lon,KINGSTON.lat,KINGSTON.lon,routeT);
+      const [nLon,nLat] = gcInterp(MIAMI.lat,MIAMI.lon,KINGSTON.lat,KINGSTON.lon,Math.min(routeT+0.01,1));
+      const vXY = projection([vLon,vLat]);
+      const nXY = projection([nLon,nLat]);
+      if(vXY){
+        const angle = nXY ? Math.atan2(nXY[1]-vXY[1],nXY[0]-vXY[0]) : 0;
+        const pSize = R*0.13;
+        ctx.save(); ctx.translate(vXY[0],vXY[1]); ctx.rotate(angle);
+        const pg=ctx.createRadialGradient(0,0,0,0,0,pSize*1.5);
+        pg.addColorStop(0,'rgba(255,220,80,0.5)'); pg.addColorStop(1,'rgba(255,220,80,0)');
+        ctx.beginPath(); ctx.arc(0,0,pSize*1.5,0,Math.PI*2); ctx.fillStyle=pg; ctx.fill();
+        ctx.font=`${pSize*2}px sans-serif`;
+        ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.fillText('✈',-pSize*0.85+3,pSize*0.75+3);
+        ctx.fillStyle='#fff'; ctx.shadowColor='rgba(245,200,0,1)'; ctx.shadowBlur=16;
+        ctx.fillText('✈',-pSize*0.85,pSize*0.75);
+        ctx.shadowBlur=0; ctx.restore();
+      }
+    }
 
-      ctx.save();
-      ctx.translate(pp.x, pp.y);
-      ctx.rotate(angle);
+    if(seaActive){
+      const [vLon,vLat] = multiGC(SEA_WAYPOINTS,routeT);
+      const [nLon,nLat] = multiGC(SEA_WAYPOINTS,Math.min(routeT+0.005,1));
+      const vXY = projection([vLon,vLat]);
+      const nXY = projection([nLon,nLat]);
+      if(vXY){
+        const angle = nXY ? Math.atan2(nXY[1]-vXY[1],nXY[0]-vXY[0]) : 0;
+        const sSize = R*0.11;
+        ctx.save(); ctx.translate(vXY[0],vXY[1]); ctx.rotate(angle);
+        const sg=ctx.createRadialGradient(0,0,0,0,0,sSize*1.6);
+        sg.addColorStop(0,'rgba(56,189,248,0.45)'); sg.addColorStop(1,'rgba(56,189,248,0)');
+        ctx.beginPath(); ctx.arc(0,0,sSize*1.6,0,Math.PI*2); ctx.fillStyle=sg; ctx.fill();
+        ctx.font=`${sSize*2}px sans-serif`;
+        ctx.fillStyle='rgba(0,0,0,0.3)'; ctx.fillText('🚢',-sSize*0.9+2,sSize*0.8+2);
+        ctx.shadowColor='rgba(56,189,248,1)'; ctx.shadowBlur=14;
+        ctx.fillText('🚢',-sSize*0.9,sSize*0.8);
+        ctx.shadowBlur=0; ctx.restore();
+      }
+    }
 
-      const pg=ctx.createRadialGradient(0,0,0,0,0,pSize*1.5);
-      pg.addColorStop(0,'rgba(255,220,80,0.5)'); pg.addColorStop(1,'rgba(255,220,80,0)');
-      ctx.beginPath(); ctx.arc(0,0,pSize*1.5,0,Math.PI*2);
-      ctx.fillStyle=pg; ctx.fill();
-
-      ctx.font=`${pSize*2}px sans-serif`;
-      ctx.fillStyle='rgba(0,0,0,0.35)';
-      ctx.fillText('✈', -pSize*0.85+3, pSize*0.75+3);
-      ctx.fillStyle='#ffffff';
-      ctx.shadowColor='rgba(245,200,0,1)'; ctx.shadowBlur=16;
-      ctx.fillText('✈', -pSize*0.85, pSize*0.75);
-      ctx.shadowBlur=0;
-      ctx.restore();
-
-      planeT = (planeT + 0.003) % 1;
+    // ── Advance active route, switch when complete ──
+    if(airActive){
+      routeT += 0.003;
+      if(routeT>=1){ routeT=0; activeRoute='sea'; }
+    } else {
+      routeT += 0.001; // ship is slower
+      if(routeT>=1){ routeT=0; activeRoute='air'; }
     }
 
     requestAnimationFrame(draw);
