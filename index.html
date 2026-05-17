@@ -188,6 +188,21 @@ body{font-family:'Barlow',sans-serif;color:var(--TXT);background:var(--W);overfl
   display:flex;align-items:center;gap:14px;
 }
 .si:last-child{border-right:none;}
+@media(max-width:640px){
+  .stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+  }
+  .si{
+    padding:18px 16px;
+    border-right:none;
+    border-bottom:1px solid rgba(12,31,94,.15);
+    justify-content:center;
+  }
+  .si:nth-child(odd){border-right:1px solid rgba(12,31,94,.15);}
+  .si:nth-last-child(-n+2){border-bottom:none;}
+}
 .si-icon{font-size:30px;}
 .si-num{font-family:'Bebas Neue',sans-serif;font-size:46px;color:var(--N1);line-height:1;}
 .si-lbl{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--N1);opacity:.7;}
